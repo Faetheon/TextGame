@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+  <title>Time to die</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+  <script src='./PlayerClass.js'></script>
+  <script src='./createdCharacter.js'></script>
+  <script src='./loadingScreen.js'></script>
+  <script src='./startUp.js'></script>
+  <script src='./MonsterClass.js'></script>
+  <link rel='stylesheet' href='./index.css'>
+</head>
+<body>
+  <div class='play-area'></div>
+  <div class='text'></div>
+  <div class='enemy-stats'></div>
+  <script>
+    let player;
+    loadingScreen();
+    $(document).ready(() => {
+      startUp();
+    });
+  </script>
+</body>
