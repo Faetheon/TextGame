@@ -3,7 +3,7 @@ export default [
   {name: 'orc', health: 40, attack: 3, exp: 2},
   {
     name: "Yoshikage Kira",
-    effects: BitesTheDust /* When health falls below 50, resets to beginning of fight and next time health falls below 50 and it doesn't kill the unit, automatically applies death to player*/,
+    effects: "BitesTheDust" /* When health falls below 50, resets to beginning of fight and next time health falls below 50 and it doesn't kill the unit, automatically applies death to player*/,
     health: 100,
     weapons: "The fact that Killer Queen has already touched the doorknob",
     expGiven: 1999,
