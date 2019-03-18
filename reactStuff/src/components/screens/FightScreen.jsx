@@ -33,6 +33,7 @@ export default withRouter(({player, updatePlayer, playerStatus, updatePlayerStat
           updateStatusText('...');
         } else if (player.isRunning) {
           updateStatusText('Coward...');
+          updateEnemyStatus(`The ${spawnedMonsters[0].name} insults you.`)
           player.isRunning = false;
           history.push('/acting');
         } else if (spawnedMonsters[0].health < 1) {
