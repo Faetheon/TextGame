@@ -18,7 +18,7 @@ class Player {
     this.exp = 0,
     this.level = 1,
     this.resist = this.will * .25,
-    this.attack = Math.floor(this.strength * 1.5),
+    this.attack = Math.floor(this.stats.strength * 1.5),
     this.expToNextLevel = 5 * this.level,
     this.mana = this.stats.intelligence + 5,
     this.actions = ['punch', 'kick', 'dodge', 'cast', 'eat', 'check inventory', 'find monster'],
