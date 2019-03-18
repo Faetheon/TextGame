@@ -5,6 +5,7 @@ export default [
     name: "Yoshikage Kira",
     effects: "BitesTheDust" /* When health falls below 50, resets to beginning of fight and next time health falls below 50 and it doesn't kill the unit, automatically applies death to player*/,
     health: 100,
+    attack: 4,
     weapons: "The fact that Killer Queen has already touched the doorknob",
     expGiven: 1999,
     description: "A middle-aged businessman trying to lead a peaceful life.",
@@ -13,7 +14,8 @@ export default [
   {
     name: "Ice Witch",
     effects: ["freeze", "fear"],
-    health: 1000,
+    health: 50,
+    attack: 8,
     weapons: ["ice breath", "conjure barrage"/* icicles */, "ice dagger"],
     expGiven: 13,
     desc: "A being so corrupted by the feeling of joy felt when staring down a helpless victim seconds from death with her cold soulless eyes, she's ascended to the level of a demon queen."
@@ -22,7 +24,8 @@ export default [
     //by James C.
     name: "Basilisk",
     effects: ["petrify", "fear"],
-    health: 200,
+    health: 300,
+    attack: 10,
     weapons: ["teeth", "gaze"],
     expGiven: 500,
     desc:  "A snakelike monster whose very gaze can turn you to stone.",

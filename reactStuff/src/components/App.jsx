@@ -14,6 +14,7 @@ export default () => {
   const [statusText, updateStatusText] = useState('Welcome to the land of... dirt I guess ¯\\_(ツ)_/¯');
   const [player, updatePlayer] = useState(new Player());
   const [enemyStatus, updateEnemyStatus] = useState('There is no enemy... Yet >:)')
+  const [playerStatus, updatePlayerStatus] = useState(`You have ${player.health} health and ${player.mana} mana.`);
   return (
       <Router>
         <div>
@@ -21,10 +22,10 @@ export default () => {
             <CharacterCreationScreen updateStatusText={updateStatusText} updatePlayer={updatePlayer} Player={Player}/>
           )}/>
           <Route path='/acting' render={() => (
-            <ActionScreen updateStatusText={updateStatusText} updatePlayer={updatePlayer} player={player}/>
+            <ActionScreen playerStatus={playerStatus} updatePlayerStatus={updatePlayerStatus} updateStatusText={updateStatusText} updatePlayer={updatePlayer} player={player}/>
           )}/>
           <Route path='/fighting' render={() => (
-            <FightScreen updateStatusText={updateStatusText} updatePlayer={updatePlayer} player={player} updateEnemyStatus={updateEnemyStatus}/>
+            <FightScreen updatePlayer={updatePlayer} playerStatus={playerStatus} updatePlayerStatus={updatePlayerStatus} updateStatusText={updateStatusText} updatePlayer={updatePlayer} player={player} updateEnemyStatus={updateEnemyStatus}/>
           )}/>
           <Route path='/' render={() => (
             <div>

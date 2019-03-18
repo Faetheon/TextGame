@@ -18,8 +18,9 @@ export default function(action, updateStatusText) {
         if (didDodge >= 50) {
           updateStatusText(`
           You attempt a somersault... And slam your head on the ground. You lose 1 health.
-          And now the ${spawnedMonsters[0].name} has stabbed your spleen. -${spawnedMonsters[0].attack} Health.
+          And now the ${spawnedMonsters[0].name} has stabbed your spleen for ${spawnedMonsters[0].attack} damage.
           `);
+          this.health -= spawnedMonsters[0].attack + 1;
         } else {
           updateStatusText('Wow, you actually dodged an attack...');
         }
@@ -55,6 +56,10 @@ export default function(action, updateStatusText) {
       break;
     case 'check inventory':
         updateStatusText(`You have:${this.inventory.reduce((acc, curr, i, arr) => acc + `${i === arr.length - 1 ? ' and' : ''} ${curr.amount} ${curr.amount > 1 ? curr.name + 's' : curr.name}`, '')}.`)
+      break;
+    case 'flee':
+        this.isRunning = true;
+        spawnedMonsters.pop();
       break;
     case 'skip turn':
         this.turns--;

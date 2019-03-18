@@ -2,7 +2,7 @@ import spawnMonster from '../spawnMonster.js';
 import monsters from '../../gameData/monsters.js';
 
 export default function(actionName, updateStatusText) {
-  if (this.exp <= this.expToNextLevel) {
+  if (this.exp >= this.expToNextLevel) {
     this.exp -= this.expToNextLevel;
     this.level++;
     this.skillPoints += 5;
@@ -19,6 +19,7 @@ export default function(actionName, updateStatusText) {
         break;
       case 'dodge':
           updateStatusText('You attempt a somersault... And slam your head on the ground. You lose 1 health.');
+          this.health--;
         break;
       case 'eat':
           let itemNameToEat = prompt(`What would you like to eat? You have:${this.inventory.reduce((acc, curr) => acc + ` ${curr.type === 'food' ? curr.name : ''}`, '')}`);

@@ -1,8 +1,6 @@
 import fight from './PlayerClassHelperFunctions/fight.js';
 import action from './PlayerClassHelperFunctions/action.js';
-import die from './PlayerClassHelperFunctions/die.js';
 import createItem from './creationFunctions/createItem.js';
-
 class Player {
   constructor(name, age, hairColor) {
     this.stats = {
@@ -24,7 +22,7 @@ class Player {
     this.expToNextLevel = 5 * this.level,
     this.mana = this.stats.intelligence + 5,
     this.actions = ['punch', 'kick', 'dodge', 'cast', 'eat', 'check inventory', 'find monster'],
-    this.combatMoves = ['punch', 'kick', 'dodge', 'cast', 'use item', 'skip turn'],
+    this.combatMoves = ['punch', 'kick', 'dodge', 'cast', 'use item', 'skip turn', 'flee'],
     this.spells = [{name: 'arcane missile', manaCost: 1}],
     this.inventory = [createItem(3, 'food', 'apple'), createItem(1, 'potion', 'health potion'), createItem(1, 'potion', 'mana potion')],
     this.turns = 2,
@@ -33,8 +31,7 @@ class Player {
     this.isCreated = false,
     this.hunger = 100,
     this.fight = fight.bind(this),
-    this.action = action.bind(this),
-    this.die = die.bind(this)
+    this.action = action.bind(this)
   }
 
 
