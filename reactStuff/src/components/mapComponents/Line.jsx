@@ -1,7 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {withRouter} from 'react-router-dom';
 import Tile from './Tile.jsx';
 
-export default ({isMoving, updateIsMoving, playerPos, updatePlayerPos, line, i}) => {
+// Functions
+import spawnMonster from '../../functionsAndClasses/spawnMonster.js';
+
+export default withRouter(({history, player, isMoving, updateIsMoving, playerPos, updatePlayerPos, line, i}) => {
   let j;
   
   return (
@@ -9,20 +13,28 @@ export default ({isMoving, updateIsMoving, playerPos, updatePlayerPos, line, i})
       onClick={
         (e) => {
           j = Number(e.target.classList[1]);
-          if (!isMoving) {
+          if (!isMoving && !player.isFighting) {
             function yAxisMove() {
               if(i > playerPos[0]) {
                 updatePlayerPos([++playerPos[0], playerPos[1]]);
               } else if(i < playerPos[0]) {
                 updatePlayerPos([--playerPos[0], playerPos[1]]);
               }
-              if(j !== playerPos[1]) {
-                window.yAxisTimeoutClear = setTimeout(xAxisMove, 1000);
-              } else if(i !== playerPos[0]) {
-                window.xAxisTimeoutClear = setTimeout(yAxisMove, 1000);
-              }
-              if (j === playerPos[1] && i === playerPos[0]) {
+              let encounter = Math.floor(Math.random() * 10);
+              if (encounter === 1) {
+                player.isFighting = true;
+                spawnMonster();
+                history.push('/fighting');
                 updateIsMoving(false);
+                } else {
+                if(j !== playerPos[1]) {
+                  window.yAxisTimeoutClear = setTimeout(xAxisMove, 1000);
+                } else if(i !== playerPos[0]) {
+                  window.xAxisTimeoutClear = setTimeout(yAxisMove, 1000);
+                }
+                if (j === playerPos[1] && i === playerPos[0]) {
+                  updateIsMoving(false);
+                }
               }
             }
             
@@ -32,13 +44,21 @@ export default ({isMoving, updateIsMoving, playerPos, updatePlayerPos, line, i})
               } else if(j < playerPos[1]) {
                 updatePlayerPos([playerPos[0], --playerPos[1]]);
               }
-              if(i !== playerPos[0]) {
-                window.yAxisTimeoutClear = setTimeout(yAxisMove, 1000);
-              } else if(j !== playerPos[1]) {
-                window.xAxisTimeoutClear = setTimeout(xAxisMove, 1000);
-              }
-              if (j === playerPos[1] && i === playerPos[0]) {
+              let encounter = Math.floor(Math.random() * 10);
+              if (encounter === 1) {
+                player.isFighting = true;
+                spawnMonster();
+                history.push('/fighting');
                 updateIsMoving(false);
+                } else {
+                if(i !== playerPos[0]) {
+                  window.yAxisTimeoutClear = setTimeout(yAxisMove, 1000);
+                } else if(j !== playerPos[1]) {
+                  window.xAxisTimeoutClear = setTimeout(xAxisMove, 1000);
+                }
+                if (j === playerPos[1] && i === playerPos[0]) {
+                  updateIsMoving(false);
+                }
               }
             }
             playerPos[0] - i > playerPos[1] - j ?
@@ -60,4 +80,4 @@ export default ({isMoving, updateIsMoving, playerPos, updatePlayerPos, line, i})
       }
     </div>
   );
-};
+});

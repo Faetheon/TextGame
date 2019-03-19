@@ -46,12 +46,18 @@ export default function(action, updateStatusText) {
         }
       break;
     case 'drink':
-        if (this.inventory[1].amount > 0) {
+        if (this.inventory[1].amount > 0 && this.health < maxHealth) {
           updateStatusText(`You drank a health potion!\nYou gained 1 health!`);
           this.inventory[1].amount--;
-          this.health++;
+          this.health += 5;
+          if (this.health > this.maxHealth) {
+            this.health = this.maxHealth;
+          }
         } else {
-          updateStatusText(`No health potions left :(`);
+          this.health < maxHealth ?
+            updateStatusText(`No health potions left :(`)
+              :
+            updateStatusText(`Why would you drink a potion when you have full health?`)
         }
       break;
     case 'check inventory':

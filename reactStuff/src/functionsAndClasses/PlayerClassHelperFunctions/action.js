@@ -43,12 +43,17 @@ export default function(actionName, updateStatusText) {
         updateStatusText(`You have:${this.inventory.reduce((acc, curr, i, arr) => acc + `${i === arr.length - 1 ? ' and' : ''} ${curr.amount} ${curr.amount > 1 ? curr.name + 's' : curr.name}`, '')}.`)
         break;
       case 'find monster':
-          spawnMonster(monsters[Math.floor(Math.random() * monsters.length)]);
+          spawnMonster();
           // $('div.enemy-stats').html(`You are fighting a ${spawnedMonsters[0].name}.<br>They have ${spawnedMonsters[0].health} health left.`);
           this.isFighting = true;
         break;
       case 'back':
           updateStatusText(`Welcome back ;)`);
+        break;
+      case 'rest':
+          if (this.health < this.maxHealth) {
+            this.health += Math.floor(this.maxHealth * 0.25);
+          }
         break;
   }
 }

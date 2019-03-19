@@ -65,22 +65,30 @@ export default () => {
               <div className='enemyStatus'>
                 {enemyStatus}
               </div>
-              <div className='map'>
-                {
-                  map.map((line, i) => (
-                    <Line isMoving={isMoving} updateIsMoving={updateIsMoving} i={i} line={line} key={i} playerPos={playerPos} updatePlayerPos={updatePlayerPos} />
-                  ))
-                }
-              </div>
               {
-                isMoving ?
-                  <button onClick={() => {
-                    clearTimeout(window.xAxisTimeoutClear);
-                    clearTimeout(window.yAxisTimeoutClear);
-                    updateIsMoving(false);
-                  }}>Cancel Movement</button>
+                player.isCreated ?
+                  <div className='map'>
+                    {
+                      map.map((line, i) => (
+                        <Line player={player} isMoving={isMoving} updateIsMoving={updateIsMoving} i={i} line={line} key={i} playerPos={playerPos} updatePlayerPos={updatePlayerPos} />
+                      ))
+                    }
+                    {
+                      isMoving && !player.isFighting ?
+                        <button onClick={() => {
+                          clearTimeout(window.xAxisTimeoutClear);
+                          clearTimeout(window.yAxisTimeoutClear);
+                          updateIsMoving(false);
+                        }}>Cancel Movement</button>
+                          :
+                        player.isFighting ?
+                          <div>Please finish the fight or run away before you begin traveling. :)</div>
+                            :
+                          <div>Click to start your journey!</div>
+                    }
+                  </div>
                     :
-                  <div>Click to start your journey!</div>
+                  <div></div>
               }
             </div>
           )}/>
