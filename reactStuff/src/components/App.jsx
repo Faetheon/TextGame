@@ -25,6 +25,8 @@ export default () => {
   const [enemyStatus, updateEnemyStatus] = useState('There is no enemy... Yet >:)')
   const [playerStatus, updatePlayerStatus] = useState(`You have ${player.health} health and ${player.mana} mana.`);
   const [playerPos, updatePlayerPos] = useState([0, 0]);
+  const [isMoving, updateIsMoving] = useState(false);
+
   return (
       <Router>
         <div>
@@ -66,10 +68,20 @@ export default () => {
               <div className='map'>
                 {
                   map.map((line, i) => (
-                    <Line i={i} line={line} key={i} playerPos={playerPos} updatePlayerPos={updatePlayerPos} />
+                    <Line isMoving={isMoving} updateIsMoving={updateIsMoving} i={i} line={line} key={i} playerPos={playerPos} updatePlayerPos={updatePlayerPos} />
                   ))
                 }
               </div>
+              {
+                isMoving ?
+                  <button onClick={() => {
+                    clearTimeout(window.xAxisTimeoutClear);
+                    clearTimeout(window.yAxisTimeoutClear);
+                    updateIsMoving(false);
+                  }}>Cancel Movement</button>
+                    :
+                  <div>Click to start your journey!</div>
+              }
             </div>
           )}/>
         </div>
