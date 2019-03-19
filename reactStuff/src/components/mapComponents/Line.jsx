@@ -2,8 +2,6 @@ import React from 'react';
 import Tile from './Tile.jsx';
 
 export default ({playerPos, updatePlayerPos, line, i}) => {
-  let yAxisTimeoutClear;
-  let xAxisTimeoutClear;
   let j;
 
   return (
@@ -11,8 +9,8 @@ export default ({playerPos, updatePlayerPos, line, i}) => {
       onClick={
         (e) => {
 
-          clearTimeout(yAxisTimeoutClear);
-          clearTimeout(xAxisTimeoutClear);
+          clearTimeout(window.yAxisTimeoutClear || function() {});
+          clearTimeout(window.xAxisTimeoutClear || function() {});
           
           j = Number(e.target.classList[1]);
 
@@ -23,9 +21,9 @@ export default ({playerPos, updatePlayerPos, line, i}) => {
               updatePlayerPos([--playerPos[0], playerPos[1]]);
             }
             if(j !== playerPos[1]) {
-              yAxisTimeoutClear = setTimeout(xAxisMove, 1000);
+              window.yAxisTimeoutClear = setTimeout(xAxisMove, 1000);
             } else if(i !== playerPos[0]) {
-              xAxisTimeoutClear = setTimeout(yAxisMove, 1000);
+              window.xAxisTimeoutClear = setTimeout(yAxisMove, 1000);
             }
           }
           
@@ -36,13 +34,16 @@ export default ({playerPos, updatePlayerPos, line, i}) => {
               updatePlayerPos([playerPos[0], --playerPos[1]]);
             }
             if(i !== playerPos[0]) {
-              xAxisTimeoutClear = setTimeout(yAxisMove, 1000);
+              window.yAxisTimeoutClear = setTimeout(yAxisMove, 1000);
             } else if(j !== playerPos[1]) {
-              xAxisTimeoutClear = setTimeout(xAxisMove, 1000);
+              window.xAxisTimeoutClear = setTimeout(xAxisMove, 1000);
             }
           }
 
-          yAxisMove();
+          i < j ?
+            xAxisMove()
+              :
+            yAxisMove()
         }
       }
     >
