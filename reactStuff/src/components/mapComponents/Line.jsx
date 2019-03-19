@@ -21,7 +21,7 @@ export default ({isMoving, updateIsMoving, playerPos, updatePlayerPos, line, i})
               } else if(i !== playerPos[0]) {
                 window.xAxisTimeoutClear = setTimeout(yAxisMove, 1000);
               }
-              if (j === playerPos[1] && i === playerPos[2]) {
+              if (j === playerPos[1] && i === playerPos[0]) {
                 updateIsMoving(false);
               }
             }
@@ -37,7 +37,7 @@ export default ({isMoving, updateIsMoving, playerPos, updatePlayerPos, line, i})
               } else if(j !== playerPos[1]) {
                 window.xAxisTimeoutClear = setTimeout(xAxisMove, 1000);
               }
-              if (j === playerPos[1] && i === playerPos[2]) {
+              if (j === playerPos[1] && i === playerPos[0]) {
                 updateIsMoving(false);
               }
             }
