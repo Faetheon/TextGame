@@ -34,6 +34,8 @@ export default withRouter(({player, updatePlayer, playerStatus, updatePlayerStat
         } else if (player.isRunning) {
           updateStatusText('Coward...');
           player.isRunning = false;
+          player.isFighting = false;
+          updateEnemyStatus('...');
           history.push('/acting');
         } else if (spawnedMonsters[0].health < 1) {
           updateStatusText(`You win!\nYou've recieved ${spawnedMonsters[0].exp} experience.`)
