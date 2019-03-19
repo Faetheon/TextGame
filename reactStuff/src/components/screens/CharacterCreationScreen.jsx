@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {withRouter} from 'react-router-dom';
+// import map from '../gameData/map.js';
 
 export default withRouter(({updatePlayer, Player, history}) => {
   return (
@@ -14,6 +15,7 @@ export default withRouter(({updatePlayer, Player, history}) => {
         <input placeholder="Enter name" name="characterName"></input>
         <input placeholder="Enter age" name="characterAge"></input>
         <input placeholder="Enter hair color" name="hairColor"></input>
+        {/* <input placeholder="Enter map size" name="mapSize"></input> */}
         <input type="submit"></input>
       </form>
     </div>
