@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 
-export default withRouter(({updatePlayerPos, player, playerStatus, updatePlayerStatus, updateStatusText, history}) => {
+export default withRouter(({player, playerStatus, updatePlayerStatus, updateStatusText, history}) => {
   if (!player.isCreated) {
     history.push('/');
   }
@@ -14,7 +14,7 @@ export default withRouter(({updatePlayerPos, player, playerStatus, updatePlayerS
       </div>
       <form onSubmit={(e) => {
         e.preventDefault();
-        player.action(e.target.actionName.value, updateStatusText, updatePlayerPos);
+        player.action(e.target.actionName.value, updateStatusText);
         updatePlayerStatus(`You have ${player.health} health and ${player.mana} mana.`);
         if (player.isFighting) {
           history.push('/fighting');

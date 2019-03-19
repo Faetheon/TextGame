@@ -1,6 +1,7 @@
 import fight from './PlayerClassHelperFunctions/fight.js';
 import action from './PlayerClassHelperFunctions/action.js';
 import createItem from './creationFunctions/createItem.js';
+
 class Player {
   constructor(name, age, hairColor) {
     this.stats = {
@@ -33,12 +34,6 @@ class Player {
     this.fight = fight.bind(this),
     this.action = action.bind(this)
   }
-
-
-  // endTurn = () => {
-  //   this.turns = 2;
-  //   // Call another function here to invoke monster turn
-  // }
 }
 
 

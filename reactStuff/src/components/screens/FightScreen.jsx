@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {withRouter} from 'react-router-dom';
 import spawnedMonsters from '../../gameData/spawnedMonsters.js';
 import Player from '../../functionsAndClasses/PlayerClass.js';
