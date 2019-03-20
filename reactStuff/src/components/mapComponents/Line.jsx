@@ -15,6 +15,9 @@ export default withRouter(({history, player, isMoving, updateIsMoving, playerPos
           j = Number(e.target.classList[1]);
           if (!isMoving && !player.isFighting) {
             function yAxisMove() {
+              if (player.isFighting) {
+                return;
+              }
               if(i > playerPos[0]) {
                 updatePlayerPos([++playerPos[0], playerPos[1]]);
               } else if(i < playerPos[0]) {
@@ -39,6 +42,9 @@ export default withRouter(({history, player, isMoving, updateIsMoving, playerPos
             }
             
             function xAxisMove() {
+              if (player.isFighting) {
+                return;
+              }
               if(j > playerPos[1]) {
                 updatePlayerPos([playerPos[0], ++playerPos[1]]);
               } else if(j < playerPos[1]) {

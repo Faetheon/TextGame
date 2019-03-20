@@ -14,9 +14,11 @@ export default withRouter(({player, playerStatus, updatePlayerStatus, updateStat
     player.stats.intelligence++;
     player.stats.charisma++;
     player.stats.will++;
+    player.levelUp();
     updateStatusText(`Congratulations! You leved up to level ${player.level}!
-    How would you like to distribute your stats?
+    How would you like to distribute your stats? (since this is still in beta +1 to all stats :3)
     `)
+    updatePlayerStatus(`You have ${player.health} health and ${player.mana} mana.`);
   }
   return (
     <div>

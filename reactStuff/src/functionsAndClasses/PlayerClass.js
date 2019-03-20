@@ -1,6 +1,7 @@
 import fight from './PlayerClassHelperFunctions/fight.js';
 import action from './PlayerClassHelperFunctions/action.js';
 import createItem from './creationFunctions/createItem.js';
+import levelUp from './PlayerClassHelperFunctions/levelUp.js';
 
 class Player {
   constructor(name, age, hairColor, isCreated=false) {
@@ -15,14 +16,15 @@ class Player {
     this.name = name || 'anonymous',
     this.age = age || 15,
     this.hairColor = hairColor || 'blue',
-    this.health = 24,
     this.maxHealth = this.stats.strength * 8,
+    this.health = this.maxHealth,
     this.exp = 0,
     this.level = 1,
-    this.resist = this.will * .25,
-    this.attack = 200,
+    this.resist = Math.ceil(this.will * 0.25),
+    this.attack = Math.floor(this.stats.strength * 1.5),
     this.expToNextLevel = 5 * this.level,
-    this.mana = this.stats.intelligence + 5,
+    this.maxMana = this.stats.intelligence + 5,
+    this.mana = this.maxMana,
     this.actions = ['punch', 'kick', 'dodge', 'cast', 'eat', 'check inventory', 'find monster', 'rest'],
     this.combatMoves = ['punch', 'kick', 'dodge', 'cast', 'use item', 'skip turn', 'flee'],
     this.spells = [{name: 'arcane missile', manaCost: 1}],
@@ -33,7 +35,8 @@ class Player {
     this.isCreated = isCreated,
     this.hunger = 100,
     this.fight = fight.bind(this),
-    this.action = action.bind(this)
+    this.action = action.bind(this),
+    this.levelUp = levelUp.bind(this)
   }
 }
 

@@ -46,7 +46,6 @@ export default withRouter(({updateIsMoving, player, updatePlayer, playerStatus, 
           updateEnemyStatus('...');
           history.push('/acting');
         } else if (spawnedMonsters[0].health < 1) {
-          console.log(spawnedMonsters, player);
           player.exp += spawnedMonsters[0].exp;
           player.isFighting = false;
           updateIsMoving(false);
