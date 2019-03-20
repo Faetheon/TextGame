@@ -7,7 +7,7 @@ export default [
     health: 100,
     attack: 4,
     weapons: "The fact that Killer Queen has already touched the doorknob",
-    expGiven: 1999,
+    exp: 1999,
     description: "A middle-aged businessman trying to lead a peaceful life.",
     weaknesses: "Ambulances"
   },
@@ -17,7 +17,7 @@ export default [
     health: 50,
     attack: 8,
     weapons: ["ice breath", "conjure barrage"/* icicles */, "ice dagger"],
-    expGiven: 13,
+    exp: 13,
     desc: "A being so corrupted by the feeling of joy felt when staring down a helpless victim seconds from death with her cold soulless eyes, she's ascended to the level of a demon queen."
   },
   {
@@ -27,7 +27,7 @@ export default [
     health: 300,
     attack: 10,
     weapons: ["teeth", "gaze"],
-    expGiven: 500,
+    exp: 500,
     desc:  "A snakelike monster whose very gaze can turn you to stone.",
   }    
 ];

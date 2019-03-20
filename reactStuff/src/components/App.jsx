@@ -55,6 +55,7 @@ export default () => {
               updateStatusText={updateStatusText}
               updatePlayer={updatePlayer} player={player}
               updateEnemyStatus={updateEnemyStatus}
+              updateIsMoving={updateIsMoving}
             />
           )}/>
           <Route path='/' render={() => (

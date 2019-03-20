@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom';
 import spawnedMonsters from '../../gameData/spawnedMonsters.js';
 import Player from '../../functionsAndClasses/PlayerClass.js';
 
-export default withRouter(({player, updatePlayer, playerStatus, updatePlayerStatus, updateStatusText, updateEnemyStatus, history}) => {
+export default withRouter(({updateIsMoving, player, updatePlayer, playerStatus, updatePlayerStatus, updateStatusText, updateEnemyStatus, history}) => {
   if (!player.isCreated) {
     history.push('/');
   } else if (!player.isFighting) {
@@ -26,20 +26,33 @@ export default withRouter(({player, updatePlayer, playerStatus, updatePlayerStat
         e.preventDefault();
         player.fight(e.target.actionName.value, updateStatusText);
         updatePlayerStatus(`You have ${player.health} health and ${player.mana} mana.`);
+        updateEnemyStatus(`
+          You are fighting a ${spawnedMonsters[0].name}.
+          They have ${spawnedMonsters[0].health} hp left.
+
+          ${spawnedMonsters[0].desc || ''}
+        `);
         if (player.health < 1) {
           alert('You have died!!')
           updatePlayer(new Player());
+          updateIsMoving(false);
           updateEnemyStatus('...');
           updateStatusText('...');
         } else if (player.isRunning) {
           updateStatusText('Coward...');
           player.isRunning = false;
           player.isFighting = false;
+          updateIsMoving(false);
           updateEnemyStatus('...');
           history.push('/acting');
         } else if (spawnedMonsters[0].health < 1) {
+          console.log(spawnedMonsters, player);
+          player.exp += spawnedMonsters[0].exp;
+          player.isFighting = false;
+          updateIsMoving(false);
           updateStatusText(`You win!\nYou've recieved ${spawnedMonsters[0].exp} experience.`)
           updateEnemyStatus(`Hmmm... I guess we wait :3`)
+          spawnedMonsters.pop();
           history.push('/acting');
         }
         e.target.actionName.value = '';

@@ -5,6 +5,19 @@ export default withRouter(({player, playerStatus, updatePlayerStatus, updateStat
   if (!player.isCreated) {
     history.push('/');
   }
+  if (player.exp >= player.expToNextLevel) {
+    player.exp -= player.expToNextLevel;
+    player.level++;
+    player.skillPoints += 5;
+    player.stats.strength++;
+    player.stats.agility++;
+    player.stats.intelligence++;
+    player.stats.charisma++;
+    player.stats.will++;
+    updateStatusText(`Congratulations! You leved up to level ${player.level}!
+    How would you like to distribute your stats?
+    `)
+  }
   return (
     <div>
       <div className="player-options">

@@ -3,7 +3,7 @@ import action from './PlayerClassHelperFunctions/action.js';
 import createItem from './creationFunctions/createItem.js';
 
 class Player {
-  constructor(name, age, hairColor) {
+  constructor(name, age, hairColor, isCreated=false) {
     this.stats = {
       strength: 3,
       agility: 3,
@@ -20,7 +20,7 @@ class Player {
     this.exp = 0,
     this.level = 1,
     this.resist = this.will * .25,
-    this.attack = Math.floor(this.stats.strength * 1.5),
+    this.attack = 200,
     this.expToNextLevel = 5 * this.level,
     this.mana = this.stats.intelligence + 5,
     this.actions = ['punch', 'kick', 'dodge', 'cast', 'eat', 'check inventory', 'find monster', 'rest'],
@@ -30,7 +30,7 @@ class Player {
     this.turns = 2,
     this.isFighting = false,
     this.isRunning = false,
-    this.isCreated = false,
+    this.isCreated = isCreated,
     this.hunger = 100,
     this.fight = fight.bind(this),
     this.action = action.bind(this)
