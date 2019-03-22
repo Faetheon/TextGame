@@ -16,6 +16,7 @@ import map from '../gameData/map.js';
 
 // Components
 import Line from './mapComponents/Line.jsx';
+import SkillPointDistribution from './SkillPointDistribution.jsx';
 
 export default () => {
   const spawnedMonsters = [];
@@ -91,6 +92,7 @@ export default () => {
                     :
                   <div></div>
               }
+              <SkillPointDistribution player={player}/>
             </div>
           )}/>
         </div>

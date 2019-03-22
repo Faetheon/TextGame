@@ -1,7 +1,7 @@
 import fight from './PlayerClassHelperFunctions/fight.js';
 import action from './PlayerClassHelperFunctions/action.js';
 import createItem from './creationFunctions/createItem.js';
-import levelUp from './PlayerClassHelperFunctions/levelUp.js';
+import updateStats from './PlayerClassHelperFunctions/updateStats.js';
 
 class Player {
   constructor(name, age, hairColor, isCreated=false) {
@@ -36,7 +36,7 @@ class Player {
     this.hunger = 100,
     this.fight = fight.bind(this),
     this.action = action.bind(this),
-    this.levelUp = levelUp.bind(this)
+    this.updateStats = updateStats.bind(this)
   }
 }
 

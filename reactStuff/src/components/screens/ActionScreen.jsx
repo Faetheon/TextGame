@@ -9,7 +9,7 @@ export default withRouter(({player, playerStatus, updatePlayerStatus, updateStat
     player.exp -= player.expToNextLevel;
     player.level++;
     player.skillPoints += 5;
-    player.levelUp();
+    player.updateStats();
   }
   updateStatusText(`Congratulations! You leved up to level ${player.level}!
   How would you like to distribute your stats? (since this is still in beta +1 to all stats :3)
