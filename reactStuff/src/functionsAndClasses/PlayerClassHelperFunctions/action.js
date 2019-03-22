@@ -1,5 +1,4 @@
 import spawnMonster from '../spawnMonster.js';
-import monsters from '../../gameData/monsters.js';
 
 export default function(actionName, updateStatusText) {
   switch (actionName ? actionName.toLowerCase() : 'nothing') {
@@ -36,7 +35,6 @@ export default function(actionName, updateStatusText) {
       break;
     case 'find monster':
         spawnMonster();
-        // $('div.enemy-stats').html(`You are fighting a ${spawnedMonsters[0].name}.<br>They have ${spawnedMonsters[0].health} health left.`);
         this.isFighting = true;
       break;
     case 'back':
