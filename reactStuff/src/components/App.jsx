@@ -16,6 +16,7 @@ import map from '../gameData/map.js';
 
 // Components
 import Line from './mapComponents/Line.jsx';
+import SkillPointDistribution from './SkillPointDistribution.jsx';
 
 export default () => {
   const spawnedMonsters = [];
@@ -30,6 +31,9 @@ export default () => {
   return (
       <Router>
         <div>
+          <div className="player-desc">
+            Welcome {player.name}.
+          </div>
           <Route path='/' exact render={() => (
             <CharacterCreationScreen
               updateStatusText={updateStatusText}
@@ -60,6 +64,7 @@ export default () => {
           )}/>
           <Route path='/' render={() => (
             <div>
+              <br></br>
               <div className='status'>
                 {statusText}
               </div>
@@ -91,6 +96,7 @@ export default () => {
                     :
                   <div></div>
               }
+              <SkillPointDistribution player={player} updatePlayer={updatePlayer} />
             </div>
           )}/>
         </div>

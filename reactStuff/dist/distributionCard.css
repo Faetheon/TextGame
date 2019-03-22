@@ -1,0 +1,43 @@
+.attribute-card {
+  display: flex;
+  width: 200px;
+  height: 300px;
+  position: absolute;
+  flex-flow: column;
+  bottom: 10px;
+  right: 10px;
+  background-color: gray;
+}
+
+.health {
+  background-color: red;
+}
+
+.mana {
+  background-color: aqua;
+}
+
+.exp {
+  background-color: yellow;
+}
+
+.bar {
+  flex-grow: 1;
+  text-align: center;
+  margin: 4px;
+  font-size: 16px;
+}
+
+.bars {
+  display: flex;
+  flex-flow: column;
+  flex-shrink: 1;
+}
+
+.player-data {
+  flex-grow: 4;
+}
+
+.inventory {
+  flex-grow: 4;
+}

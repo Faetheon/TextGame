@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom';
 
-export default withRouter(({player, playerStatus, updatePlayerStatus, updateStatusText, history}) => {
+export default withRouter(({player, updatePlayer, playerStatus, updatePlayerStatus, updateStatusText, history}) => {
+  const [lastAction, updateLastAction] = useState('');
   if (!player.isCreated) {
     history.push('/');
   }
@@ -9,11 +10,13 @@ export default withRouter(({player, playerStatus, updatePlayerStatus, updateStat
     player.exp -= player.expToNextLevel;
     player.level++;
     player.skillPoints += 5;
-    player.levelUp();
+    player.updateStats();
   }
-  updateStatusText(`Congratulations! You leved up to level ${player.level}!
-  How would you like to distribute your stats? (since this is still in beta +1 to all stats :3)
-  `)
+  if (player.skillPoints > 0) {
+    updateStatusText(`Congratulations! You leved up to level ${player.level}!
+    How would you like to distribute your stats?
+    `);
+  }
   updatePlayerStatus(`You have ${player.health} health and ${player.mana} mana.`);
   return (
     <div>
@@ -24,11 +27,13 @@ export default withRouter(({player, playerStatus, updatePlayerStatus, updateStat
       </div>
       <form onSubmit={(e) => {
         e.preventDefault();
-        player.action(e.target.actionName.value, updateStatusText);
+        player.action(e.target.actionName.value.length > 0 ? e.target.actionName.value : lastAction, updateStatusText);
+        updateLastAction(e.target.actionName.value.length > 0 ? e.target.actionName.value : lastAction);
         updatePlayerStatus(`You have ${player.health} health and ${player.mana} mana.`);
         if (player.isFighting) {
           history.push('/fighting');
         }
+        updatePlayer(player);
         e.target.actionName.value = '';
       }}>
         <input placeholder="Enter action name" name="actionName"></input>

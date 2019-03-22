@@ -1,13 +1,13 @@
 export default [
   {name: 'goblin', health: 20, attack: 1, exp: 2},
-  {name: 'orc', health: 40, attack: 3, exp: 2},
+  {name: 'orc', health: 40, attack: 3, exp: 5},
   {
     name: "Yoshikage Kira",
     effects: "BitesTheDust" /* When health falls below 50, resets to beginning of fight and next time health falls below 50 and it doesn't kill the unit, automatically applies death to player*/,
     health: 100,
     attack: 4,
     weapons: "The fact that Killer Queen has already touched the doorknob",
-    exp: 1999,
+    exp: 10,
     description: "A middle-aged businessman trying to lead a peaceful life.",
     weaknesses: "Ambulances"
   },
