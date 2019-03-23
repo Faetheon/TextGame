@@ -61,7 +61,7 @@ export default withRouter(({updateIsMoving, player, updatePlayer, playerStatus, 
         updateCssForBars(player);
         e.target.actionName.value = '';
       }}>
-        <input placeholder="Enter action name" name="actionName"></input>
+        <input placeholder={lastAction || 'Action name'} name="actionName"></input>
         <input type="submit"></input>
       </form>
     </div>
