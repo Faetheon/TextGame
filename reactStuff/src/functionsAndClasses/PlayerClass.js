@@ -2,6 +2,7 @@ import fight from './PlayerClassHelperFunctions/fight.js';
 import action from './PlayerClassHelperFunctions/action.js';
 import createItem from './creationFunctions/createItem.js';
 import updateStats from './PlayerClassHelperFunctions/updateStats.js';
+import createSpell from './creationFunctions/createSpell.js';
 
 class Player {
   constructor(name, age, hairColor, isCreated=false) {
@@ -25,9 +26,10 @@ class Player {
     this.expToNextLevel = 5 * this.level,
     this.maxMana = this.stats.intelligence + 5,
     this.mana = this.maxMana,
+    this.critChance = Math.floor(this.stats.agility * 0.1);
     this.actions = ['punch', 'kick', 'dodge', 'cast', 'eat', 'check inventory', 'find monster', 'rest'],
     this.combatMoves = ['punch', 'kick', 'dodge', 'cast', 'use item', 'skip turn', 'flee'],
-    this.spells = [{name: 'arcane missile', manaCost: 1}],
+    this.spells = [createSpell('arcane missile', 1, 5, 'attack'), createSpell('small heal', 1, 5, 'support')],
     this.inventory = [createItem(3, 'food', 'apple'), createItem(1, 'potion', 'health potion'), createItem(1, 'potion', 'mana potion')],
     this.turns = 2,
     this.isFighting = false,

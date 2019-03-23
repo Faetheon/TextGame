@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
+import updateCssForBars from './utils/updateCssForBars.js';
 
 export default function({player}) {
   const [strength, updateStrength] = useState(player.stats.strength);
   const [agility, updateAgility] = useState(player.stats.agility);
   const [intelligence, updateIntelligence] = useState(player.stats.intelligence);
   const [will, updateWill] = useState(player.stats.will);
+  updateCssForBars(player);
+  
   return (
     <div className='attribute-card'>
       <div className='bars'>

@@ -1,3 +1,9 @@
+:root {
+  --health-gradient: linear-gradient(to left, gray 0%, red 0%);
+  --mana-gradient: linear-gradient(to left, gray 0%, aqua 0%);
+  --exp-gradient: linear-gradient(to left, gray 0%, yellow 0%);
+}
+
 .attribute-card {
   display: flex;
   width: 200px;
@@ -10,15 +16,15 @@
 }
 
 .health {
-  background-color: red;
+  background: var(--health-gradient);
 }
 
 .mana {
-  background-color: aqua;
+  background: var(--mana-gradient);
 }
 
 .exp {
-  background-color: yellow;
+  background: var(--exp-gradient);
 }
 
 .bar {
