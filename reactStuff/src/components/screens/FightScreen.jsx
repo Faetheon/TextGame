@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom';
 import spawnedMonsters from '../../gameData/spawnedMonsters.js';
 import Player from '../../functionsAndClasses/PlayerClass.js';
+import updateCssForBars from '../utils/updateCssForBars.js';
 
 export default withRouter(({updateIsMoving, player, updatePlayer, playerStatus, updatePlayerStatus, updateStatusText, updateEnemyStatus, history}) => {
   const [lastAction, updateLastAction] = useState('');
@@ -57,6 +58,7 @@ export default withRouter(({updateIsMoving, player, updatePlayer, playerStatus, 
           history.push('/acting');
         }
         updatePlayer(player);
+        updateCssForBars(player);
         e.target.actionName.value = '';
       }}>
         <input placeholder="Enter action name" name="actionName"></input>

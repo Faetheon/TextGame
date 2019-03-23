@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom';
+import updateCssForBars from '../utils/updateCssForBars.js';
 
 export default withRouter(({player, updatePlayer, playerStatus, updatePlayerStatus, updateStatusText, history}) => {
   const [lastAction, updateLastAction] = useState('');
@@ -18,6 +19,7 @@ export default withRouter(({player, updatePlayer, playerStatus, updatePlayerStat
     `);
   }
   updatePlayerStatus(`You have ${player.health} health and ${player.mana} mana.`);
+  updateCssForBars(player);
   return (
     <div>
       <div className="player-options">
@@ -34,6 +36,7 @@ export default withRouter(({player, updatePlayer, playerStatus, updatePlayerStat
           history.push('/fighting');
         }
         updatePlayer(player);
+        updateCssForBars(player);
         e.target.actionName.value = '';
       }}>
         <input placeholder="Enter action name" name="actionName"></input>

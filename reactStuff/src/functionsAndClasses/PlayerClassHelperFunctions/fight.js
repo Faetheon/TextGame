@@ -1,17 +1,21 @@
 import spawnedMonsters from '../../gameData/spawnedMonsters.js';
 
 export default function(action, updateStatusText) {
+  let crit = false;
   if(this.turns < 1) {
     this.endTurn();
+  }
+  if(this.critChance >= Math.floor(Math.random() * 100)) {
+    crit = true;
   }
   switch (action ? action.toLowerCase() : 'nothing') {
     case 'punch':
         updateStatusText(`You slam your fist into the ${spawnedMonsters[0].name}s face.`);
-        spawnedMonsters[0].health -= this.attack;
+        spawnedMonsters[0].health -= crit ? Math.floor(this.attack * 1.5) : this.attack;
       break;
     case 'kick':
-        updateStatusText(`Your heel impacts the ${spawnedMonsters[0].name}s head.`);
-        spawnedMonsters[0].health -= this.attack;
+        updateStatusText(cirt ? `Critical Hit! Your heel smashes the ${spawnedMonsters[0].name}s head.` : `Your heel impacts the ${spawnedMonsters[0].name}s head.`);
+        spawnedMonsters[0].health -= crit ? Math.floor(this.attack * 1.5) : this.attack;
       break;
     case 'dodge':
         let didDodge = Math.floor(Math.random() * 100);
@@ -34,19 +38,26 @@ export default function(action, updateStatusText) {
         updateStatusText(`You ate ${itemNameToEat === this.inventory[0].name ? `an ${itemNameToEat}.` : 'nothing.'}`);
       break;
     case 'cast':
+        let spell = prompt(`Available spells are ${this.spells.reduce((acc, curr, i) => acc + (i === this.spells.length - 1 ? ` and ${curr.name}` : `, ${curr.name}`), '')}.`)
+        let i = 0;
+        for(i; i < this.spells.length; i++) {
+          if(spell === this.spells[i].name) {
+            break;
+          }
+        }
         if (this.mana > 0) {
-          let answer = confirm(`This will cost ${this.spells[0].manaCost} mana.`);
+          let answer = confirm(`This will cost ${this.spells[i].manaCost} mana.`);
           if (answer) {
             this.mana--;
-            updateStatusText(`You've cast ${this.spells[0].name}!\nYou have ${this.mana} mana left.`);
-            spawnedMonsters[0].health -= 5;
+            updateStatusText(`You've cast ${this.spells[i].name}!\nYou have ${this.mana} mana left.`);
+            spawnedMonsters[0].health -= this.spells[i].baseDamage + Math.floor(this.spells[i].baseDamage * (this.stats.intelligence * 0.1));
           }
         } else {
           updateStatusText("You're out of mana.");
         }
       break;
     case 'drink':
-        if (this.inventory[1].amount > 0 && this.health < maxHealth) {
+        if (this.inventory[1].amount > 0 && this.health < this.maxHealth) {
           updateStatusText(`You drank a health potion!\nYou gained 1 health!`);
           this.inventory[1].amount--;
           this.health += 5;

@@ -6,4 +6,5 @@ export default function() {
   this.maxMana = this.stats.intelligence + 5;
   this.mana = this.maxMana;
   this.attack = Math.floor(this.stats.strength * 1.5);
+  this.critChance = Math.floor(this.stats.agility * 0.1);
 }
