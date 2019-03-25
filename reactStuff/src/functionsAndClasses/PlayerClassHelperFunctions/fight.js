@@ -76,7 +76,6 @@ export default function(action, updateStatusText) {
       break;
     case 'flee':
         this.isRunning = true;
-        spawnedMonsters.pop();
       break;
     case 'skip turn':
         this.turns--;
