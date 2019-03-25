@@ -1,15 +1,16 @@
 // Library packages
 import React, {useState} from 'react';
-import { BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 // Screens
 import FightScreen from './screens/FightScreen.jsx';
-import CharacterCreationScreen from './screens/CharacterCreationScreen.jsx';
+import LoginScreen from './screens/LoginScreen.jsx';
 import ActionScreen from './screens/ActionScreen.jsx';
+import CharacterCreationScreen from './screens/CharacterCreationScreen.jsx';
 
 // Functions and classes
-import spawnMonster from '../functionsAndClasses/spawnMonster.js';
 import Player from '../functionsAndClasses/PlayerClass.js';
+import spawnMonster from '../functionsAndClasses/spawnMonster.js';
 
 // Data
 import map from '../gameData/map.js';
@@ -27,6 +28,7 @@ export default () => {
   const [playerStatus, updatePlayerStatus] = useState(`You have ${player.health} health and ${player.mana} mana.`);
   const [playerPos, updatePlayerPos] = useState([0, 0]);
   const [isMoving, updateIsMoving] = useState(false);
+  const [isLoggedIn, updateIsLoggedIn] = useState(false);
 
   return (
       <Router>
@@ -36,6 +38,7 @@ export default () => {
           </div>
           <Route path='/' exact render={() => (
             <CharacterCreationScreen
+              isLoggedIn={isLoggedIn}
               updateStatusText={updateStatusText}
               updatePlayer={updatePlayer}
               Player={Player}
@@ -51,6 +54,9 @@ export default () => {
               player={player}
             />
           )}/>
+          <Route path='/login' render={() => (
+            <LoginScreen updateIsLoggedIn={updateIsLoggedIn} />
+          )} />
           <Route path='/fighting' render={() => (
             <FightScreen
               updatePlayer={updatePlayer}

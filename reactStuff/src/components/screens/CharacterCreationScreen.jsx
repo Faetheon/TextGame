@@ -2,7 +2,10 @@ import React from 'react';
 import {withRouter} from 'react-router-dom';
 // import map from '../gameData/map.js';
 
-export default withRouter(({updatePlayer, Player, history}) => {
+export default withRouter(({isLoggedIn, updatePlayer, Player, history}) => {
+  if(!isLoggedIn) {
+    history.push('/login');
+  }
   return (
     <div>
       <form onSubmit={(e) => {
