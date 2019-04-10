@@ -14,17 +14,21 @@ client.on("error", function (err) {
 });
  
 // client.set("string key", "string val", redis.print);
-// client.hset("hash key", "hashtest 1", "some value", redis.print);
-// client.hset(["hash key", "hashtest 2", "some other value"], redis.print);
-client.hkeys("hash key", function (err, replies) {
-    console.log(replies.length + " replies:");
-    replies.forEach(function (reply, i) {
-        console.log("    " + i + ": " + reply);
+// client.hset("hash key", "myval", "some value", redis.print);
+client.hset(["hash key", "another 2", "death other value"], redis.print);
+client.hkeys("hash key", function (err, res) {
+    console.log(res.length + " res:");
+    res.forEach(function (res, i) {
+        console.log("    " + i + ": " + res);
+    });
+    client.hget('hash key', 'another 2', (err, res) => {
+      console.log(res || err);
     });
     client.quit();
 });
-
-// Temp script to generate data for testing
+client.hget('hash key', 'another 2', (err, res) => {
+  
+});
 const DIR_TO_SERVE = path.join(__dirname, '../reactStuff/dist');
 const app = express();
 app.use(express.static(DIR_TO_SERVE));
@@ -32,6 +36,34 @@ app.use(express.static(DIR_TO_SERVE));
 app.use(bodyParser({extended: true})); 
 // So we don't have to specify a bunch of headers
 app.use(cors());
+
+app.put('/signup', (req, res) => {
+  const {username, password, playerData} = req.body;
+  client.hget('userdata', 'username', (err, reply) => {
+    if (username !== reply) {
+      client.hset('userdata', 'username', username, 'password', password, 'player_json', playerData, () => {
+        client.hget('userdata', 'username', (err, reply) => {
+          console.log(reply || err);
+        });
+      });
+      // res.sendStatus(301);
+    } else {
+      // res.sendStatus(400);
+    }
+  });
+});
+
+app.post('/login', (req, res) => {
+  const {username, password} = req.body;
+  client.hget('userdata', 'username', 'password', (err, res) => {
+    if (username === res) {
+      client.hget('userdata', 'username', username, 'password', password, 'player_json', playerData);
+      res.status(301).send();
+    } else {
+      res.status(400).send();
+    }
+  });
+});
 
 app.get('*', (req, res) => {
   res.send(`

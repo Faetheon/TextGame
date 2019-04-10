@@ -9,8 +9,8 @@ export default withRouter(function({updateIsLoggedIn, history}) {
         updateIsLoggedIn(true);
         history.push('/');
       }}>
-        <input type='text' name='username'></input>
-        <input type='password' name='password'></input>
+        <input type='text' placeholder='Username' name='username'></input>
+        <input type='password' placeholder='password' name='password'></input>
         <input type='submit'></input>
       </form>
     </div>
